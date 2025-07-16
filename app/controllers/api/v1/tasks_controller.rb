@@ -6,11 +6,11 @@ module Api
 
       def index
         tasks = Task.all
-                    .by_status(params[:status])
-                    .by_title(params[:title])
-                    .by_description(params[:description])
-                    .by_created_at(params[:created_at])
-                    .by_due_date(params[:due_date])
+        tasks = tasks.by_status(params[:status]) if params[:status].present?
+        tasks = tasks.by_title(params[:title]) if params[:title].present?
+        tasks = tasks.by_description(params[:description]) if params[:description].present?
+        tasks = tasks.by_created_at(params[:created_at]) if params[:created_at].present?
+        tasks = tasks.by_due_date(params[:due_date]) if params[:due_date].present?
         render json: tasks
       end
 
