@@ -2,6 +2,7 @@
 module Api
   module V1
     class TasksController < ApplicationController
+      protect_from_forgery with: :null_session
       before_action :set_task, only: [ :show, :update, :destroy ]
 
       def index

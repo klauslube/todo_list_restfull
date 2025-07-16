@@ -1,24 +1,81 @@
-# README
+Todo List RESTful API
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Projeto simples de API para gerenciamento de tarefas (To-Do List) com Ruby on Rails.
 
-Things you may want to cover:
+✅ Funcionalidades
 
-* Ruby version
+Criar, listar, atualizar e excluir tarefas.
 
-* System dependencies
+Filtrar tarefas por status, título, descrição, data de criação e data de vencimento.
 
-* Configuration
+Organização por scopes no model.
 
-* Database creation
+Atualização automática do status para overdue se a tarefa vencer.
 
-* Database initialization
+🚀 Setup do Projeto
 
-* How to run the test suite
+1. Clone o repositório
 
-* Services (job queues, cache servers, search engines, etc.)
+git clone https://github.com/klauslube/todo_list_restfull.git
+cd todo_list_restfull
 
-* Deployment instructions
+2. Instale as dependências
 
-* ...
+bundle install
+
+3. Crie e migre o banco de dados
+
+rails db:create db:migrate
+
+4. Popule com tarefas exemplo (opcional)
+
+rails db:seed
+
+5. Rode o servidor
+
+rails server
+
+A API estará acessível em: http://localhost:3000/api/v1/tasks
+
+🧪 Exemplos de uso com cURL
+
+📃 Listar todas as tarefas
+
+curl http://localhost:3000/api/v1/tasks
+
+🔍 Filtrar tarefas por status
+
+curl "http://localhost:3000/api/v1/tasks?status=completed"
+
+➕ Criar uma tarefa
+
+curl -X POST http://localhost:3000/api/v1/tasks \
+ -H "Content-Type: application/json" \
+ -d '{
+"title": "Nova tarefa",
+"description": "Descrição da tarefa",
+"status": "in_progress",
+"due_date": "2025-07-20"
+}'
+
+✏️ Atualizar uma tarefa
+
+curl -X PATCH http://localhost:3000/api/v1/tasks/1 \
+ -H "Content-Type: application/json" \
+ -d '{"status": "completed"}'
+
+🗑️ Deletar uma tarefa
+
+curl -X DELETE http://localhost:3000/api/v1/tasks/1
+
+📂 Estrutura da API
+
+GET /api/v1/tasks
+
+POST /api/v1/tasks
+
+GET /api/v1/tasks/:id
+
+PATCH /api/v1/tasks/:id
+
+DELETE /api/v1/tasks/:id
